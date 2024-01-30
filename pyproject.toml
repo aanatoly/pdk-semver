@@ -1,0 +1,148 @@
+[project]
+name = "pdk-semver"
+dynamic = ["version"]
+description = "Versioning tool"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Anatoly Asviyan", email = "jon@dot.com" },
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development",
+]
+
+dependencies = [
+    "pydevkit >= 3.1.2, < 4.0.0"
+]
+
+
+[project.scripts]
+pdk-semver = "pdk_semver.__main__:main"
+
+
+[project.urls]
+Homepage   = "https://github.com/aanatoly/pdk-semver"
+Repository = "https://github.com/aanatoly/pdk-semver"
+
+#### pdm ####
+[build-system]
+requires = ["pdm-pep517"]
+build-backend = "pdm.pep517.api"
+
+[tool.pdm.version]
+source = "scm"
+write_to = "pdk_semver/__version__.py"
+write_template = "__version__ = '{}'"
+
+[tool.pdm.build]
+excludes = [ "**/.*.sw*" ]
+
+[tool.cruft]
+skip = ["README.md", "tests/"]
+
+[tool.black]
+line-length = 83
+
+[tool.ruff]
+select = [
+    # > pydocstyle
+    "D100", "D2", "D3", "D4",
+    # > flake8-2020
+    "YTT",
+    # > flake8-boolean-trap
+    "FBT",
+    # > flake8-bugbear
+    "B",
+    # > flake8-builtins
+    "A",
+    # > flake8-comprehensions
+    "C4",
+    # > flake8-datetimez
+    "DTZ",
+    # > flake8-debugger
+    "T10",
+    # > flake8-errmsg
+    "EM",
+    # > flake8-executable
+    "EXE",
+    # > flake8-implicit-str-concat
+    "ISC",
+    # > flake8-logging-format
+    "G",
+    # > flake8-pie
+    "PIE",
+    # > flake8-pytest-style
+    "PT",
+    # > flake8-return
+    "RET",
+    # > flake8-unused-arguments
+    "ARG",
+    # > Pylint
+    "PL",
+    # > eradicate
+    "ERA",
+    # > isort
+    "I",
+    # > ruff
+    "RUF",
+    # > pep8-naming
+    "N",
+    # > pyflakes
+    "F",
+    # > pycodestyle
+    "E",
+    # > pycodestyle
+    "W"
+]
+
+ignore = [
+    # 1 blank line required before class docstring
+    "D203",
+    # Multi-line docstring summary should start at the first line
+    "D212",
+    # Module level import not at top of file
+    "E402"
+]
+
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = [
+    "A", "B", "C", "D", "E", "F", "G", "I", "N", "Q", "S", "T", "W", "ANN",
+    "ARG", "BLE", "COM", "DJ", "DTZ", "EM", "ERA", "EXE", "FBT", "ICN", "INP",
+    "ISC", "NPY", "PD", "PGH", "PIE", "PL", "PT", "PTH", "PYI", "RET", "RSE",
+    "RUF", "SIM", "SLF", "TCH", "TID", "TRY", "UP", "YTT"
+]
+unfixable = []
+
+line-length = 83
+
+[tool.tbump]
+github_url = "https://github.com/aanatoly/pdk-semver"
+
+[tool.tbump.version]
+current = "0.1.0"
+
+regex = '''
+  (?P<major>\d+)
+  \.
+  (?P<minor>\d+)
+  \.
+  (?P<patch>\d+)
+  '''
+
+[tool.tbump.git]
+message_template = "bump to {new_version}"
+tag_template = "{new_version}"
+
+[[tool.tbump.before_commit]]
+name = "check changelog style"
+cmd = ".ci/venv --name=app run check-changelog --release={new_version}"
+
+[[tool.tbump.before_commit]]
+name = "check version in changelog"
+cmd = "grep -q {new_version} CHANGELOG.md"

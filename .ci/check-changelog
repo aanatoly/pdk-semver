@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+"""
+Check that changelog conforms to [keep-a-changelog] format.
+
+To install, copy this script to `.git/hooks/pre-push`
+
+[keep-a-changelog]: https://keepachangelog.com/en/
+"""
+
+import re
+import sys
+
+doc_url = "https://keepachangelog.com/en/"
+footer = f"\n\nSee '{doc_url}' for a style guide.\n\n"
+
+# TODO: use configuration file to override
+tag_header_re = "\\[(TAGRE)\\].*(\\d{4}-\\d{2}-\\d{2})"
+tag_link_re = "\\[(TAGRE)\\]: .*TAGRE"
+changelog = "CHANGELOG.md"
+
+
+def scan_refs():
+    try:
+        txt = open(changelog, "r").read()
+    except FileNotFoundError:
+        print(
+            f"You do not have {changelog}. Please create one.{footer}",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    except Exception as exp:
+        print(exp, file=sys.stderr)
+        sys.exit(1)
+
+    msg = []
+    for line in sys.stdin:
+        args = line.strip().split()
+        if args[0].startswith("refs/tags"):
+            tag = args[0].split("/", 2)[-1]
+            msg += changelog_has_tag(txt, tag)
+
+    if not msg:
+        sys.exit(0)
+
+    msg = "\n".join(msg)
+    msg = f"\n{changelog} is incomplete.\n{msg}{footer}"
+    print(msg, file=sys.stderr)
+    sys.exit(1)
+
+
+def changelog_has_tag(txt, tag):
+    tag_re = re.escape(tag)
+    msg = []
+    if not re.search(tag_header_re.replace("TAGRE", tag_re), txt):
+        msg += [
+            f" * Tag '{tag}' has no changelog."
+            f" Section '## [{tag}] - YYYY-MM-DD' was not found"
+        ]
+    if not re.search(tag_link_re.replace("TAGRE", tag_re), txt):
+        msg += [
+            f" * Tag '{tag}' has no link to release page."
+            f" Section '[{tag}]: URL' was not found"
+        ]
+    return msg
+
+
+scan_refs()

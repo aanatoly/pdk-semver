@@ -1,0 +1,17 @@
+---
+extends: default
+
+rules:
+  comments-indentation: disable
+  braces:
+    min-spaces-inside-empty: 0
+    max-spaces-inside-empty: 0
+  brackets:
+    min-spaces-inside-empty: 0
+    max-spaces-inside-empty: 0
+  document-start:
+    present: true
+  indentation:
+    spaces: 2
+    indent-sequences: true
+    check-multi-line-strings: false

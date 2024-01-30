@@ -1,0 +1,25 @@
+{
+  "template": "https://github.com/aanatoly/pdk-cookiecutter/",
+  "commit": "e8dd33fb2d29d56367c22aab682f08c1ab6bf221",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "author_name": "Anatoly Asviyan",
+      "author_email": "jon@dot.com",
+      "github_username": "aanatoly",
+      "project_name": "pdk-semver",
+      "project_slug": "pdk-semver",
+      "package_name": "pdk_semver",
+      "project_short_description": "Versioning tool",
+      "build_backend": "pdm",
+      "max_line_length": "83",
+      "build_docker": "no",
+      "use_spelling": "no",
+      "_copy_without_render": [
+        ".ci/venv"
+      ],
+      "_template": "https://github.com/aanatoly/pdk-cookiecutter/"
+    }
+  },
+  "directory": null
+}
