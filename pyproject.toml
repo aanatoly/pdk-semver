@@ -139,6 +139,9 @@ regex = '''
 message_template = "bump to {new_version}"
 tag_template = "{new_version}"
 
+[[tool.tbump.file]]
+src = ".pkg-info.json"
+
 [[tool.tbump.before_commit]]
 name = "check changelog style"
 cmd = ".ci/venv --name=app run check-changelog --release={new_version}"
