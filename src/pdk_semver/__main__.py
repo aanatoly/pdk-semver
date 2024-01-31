@@ -31,52 +31,12 @@ import sys
 
 import pydevkit.log.config  # noqa: F401
 from pydevkit.argparse import ArgumentParser
-from pydevkit.shell import Shell
 
 from . import __version__
+from .scm import get_scm_vals
 from .ver import Version
 
 log = logging.getLogger(__name__)
-
-
-class GitVals:
-    @staticmethod
-    def supported(path):
-        sh = Shell()
-        sh["dir"] = path
-        sh["git"] = 'git -C "%(dir)s"' % sh
-        sh("%(git)s rev-parse --git-dir >& /dev/null")
-
-    @staticmethod
-    def get_vals(adir, aref) -> dict:
-        sh = Shell()
-        sh["dir"] = adir
-        sh["ref"] = aref
-        sh["git"] = 'git -C "%(dir)s"' % sh
-        rc = {}
-        # find closest tag
-        val = sh.inp("%(git)s describe --abbrev=0 %(ref)s 2>/dev/null | cat")
-        rc["base_value"] = val if val else "0.1.0"
-        if val:
-            val += ".."
-        sh["tag"] = val
-        val = int(sh.inp("%(git)s rev-list %(tag)s%(ref)s --count"))
-        rc["rev_value"] = val
-        val = sh.inp("%(git)s rev-parse --short %(ref)s")
-        rc["binfo_value"] = ["git", val]
-        return rc
-
-
-def get_vc_vals(path, ref) -> dict:
-    for cls in [GitVals]:
-        try:
-            cls.supported(path)
-            log.debug("git repo found at '%s", path)
-            return cls.get_vals(path, ref)
-        except Exception:
-            pass
-    log.warning("no version control found at '%s", path)
-    return {}
 
 
 def get_cmd_vals(args) -> dict:
@@ -120,13 +80,13 @@ def main():
 
     ver = Version()
     cmd_vals = get_cmd_vals(args)
-    git_vals = get_vc_vals(args.path, args.ref)
+    scm_vals = get_scm_vals(args.path, args.ref)
     if args.style != "all":
-        print(ver.fmt(Version.Styles[args.style], git_vals, cmd_vals))
+        print(ver.fmt(Version.Styles[args.style], scm_vals, cmd_vals))
         return
 
     for k, v in Version.Styles.items():
-        print("%8s" % k, ver.fmt(v, git_vals, cmd_vals))
+        print("%8s" % k, ver.fmt(v, scm_vals, cmd_vals))
 
 
 if __name__ == "__main__":
