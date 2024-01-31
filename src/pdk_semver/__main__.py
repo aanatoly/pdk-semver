@@ -8,7 +8,7 @@ You can override components via command line options.
 
 EPILOG:
 Examples:
-Print version in default style, e.g. internal
+Print version in default style, which is "internal"
   $ pdk-semver
   3.2.2-rev.3.git.b674019
 
@@ -22,7 +22,6 @@ Print all styles
     public 3.2.2-rev.3.some.info
    baserev 3.2.2-rev.3
       base 3.2.2
-    latest 3.2
 """
 
 
