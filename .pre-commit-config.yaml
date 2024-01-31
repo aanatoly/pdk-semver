@@ -45,6 +45,7 @@ repos:
       - id: markdownlint-fix-docker
         name: markdownlint
         args: [-c, .ci/markdownlint.jsonc]
+        exclude: CHANGELOG.md
   - repo: https://github.com/adrienverge/yamllint.git
     rev: v1.32.0
     hooks:
