@@ -47,15 +47,6 @@ class Version:
                 "rinfo_show": False,
                 "binfo_show": False,
             },
-            "latest": {
-                "base_show": True,
-                "base_latest": True,
-                "rev_show": False,
-                "rev_show_zero": False,
-                "rev_prefix": "rev",
-                "rinfo_show": False,
-                "binfo_show": False,
-            },
         }
     )
 
