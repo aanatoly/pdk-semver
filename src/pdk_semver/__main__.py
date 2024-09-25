@@ -13,17 +13,16 @@ Print version in default style, which is "internal"
   3.2.2-rev.3.git.b674019
 
 Print version in default style, with release info "arch.aarch64"
-  $ pdk-semver --rinfo-value arch.aarch64
+  $ pdk-semver --extra arch.aarch64
   3.2.2-rev.3.arch.aarch64.git.b674019
 
 Print all styles
-  $ pdk-semver -s all --rinfo-value some.info
+  $ pdk-semver -s all --extra some.info
   internal 3.2.2-rev.3.some.info.git.b674019
     public 3.2.2-rev.3.some.info
    baserev 3.2.2-rev.3
       base 3.2.2
 """
-
 
 import logging
 import sys
@@ -32,14 +31,14 @@ import pydevkit.log.config  # noqa: F401
 from pydevkit.argparse import ArgumentParser
 
 from . import __version__
-from .scm import get_scm_vals
+from .scm import get_commit
 from .ver import Version
 
 log = logging.getLogger(__name__)
 
 
-def get_cmd_vals(args) -> dict:
-    vals = {}
+def get_cmd_vals(args: object) -> dict[str, str]:
+    vals: dict[str, str] = {}
     for k, v in vars(args).items():
         pfx = k.split("_", 1)[0]
         if pfx in ["rinfo"]:
@@ -64,9 +63,7 @@ def get_args():
         default="internal",
         choices=styles,
     )
-    p.add_argument(
-        "--rinfo-value", help="release info component", metavar="txt", default=""
-    )
+    p.add_argument("--extra", help="extra info", metavar="txt", default="")
 
     return p.parse_known_args()
 
@@ -77,15 +74,13 @@ def main():
         log.warning("Unknown arguments: %s", unknown_args)
         sys.exit(1)
 
-    ver = Version()
-    cmd_vals = get_cmd_vals(args)
-    scm_vals = get_scm_vals(args.path, args.ref)
+    ver = Version(get_commit(args.path, args.ref))
     if args.style != "all":
-        print(ver.fmt(Version.Styles[args.style], scm_vals, cmd_vals))
+        print(ver.fmt(args.style, args.extra))
         return
 
-    for k, v in Version.Styles.items():
-        print("%8s" % k, ver.fmt(v, scm_vals, cmd_vals))
+    for k in Version.Styles:
+        print("%8s" % k, ver.fmt(k, args.extra))
 
 
 if __name__ == "__main__":
