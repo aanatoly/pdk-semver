@@ -154,7 +154,7 @@ cmd = "grep -q {new_version} CHANGELOG.md"
 
 [tool.basedpyright]
 include = ["src"]
-exclude = ["**/node_modules",
+exclude = [
     "**/__pycache__",
 ]
 
@@ -163,3 +163,9 @@ reportAny = false
 reportUnusedImport = false
 reportMissingTypeStubs = false
 reportUnusedCallResult = false
+
+[tool.mypy]
+ignore_missing_imports = true
+strict = true
+show_error_codes = true
+files =["src"]
