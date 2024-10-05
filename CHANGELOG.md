@@ -5,6 +5,8 @@
 ### Fixed
 
  - update docs
+ - add `mypy` and `checkmake` linters
+ - code cleanup
 
 ## [1.2.0] - 2024-10-04
 
