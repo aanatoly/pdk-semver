@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+
+ - update docs
+
 ## [1.2.0] - 2024-10-04
 
 ### Changed
@@ -24,6 +30,7 @@
 
  * initial commit
 
+[Unreleased]: https://github.com/aanatoly/pdk-semver
 [1.2.0]: https://github.com/aanatoly/pdk-semver/releases/tag/1.2.0
 [1.1.0]: https://github.com/aanatoly/pdk-semver/releases/tag/1.1.0
 [1.0.0]: https://github.com/aanatoly/pdk-semver/releases/tag/1.0.0

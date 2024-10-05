@@ -58,7 +58,7 @@ def get_args():
     return p.parse_known_args()
 
 
-def main():
+def main() -> None:
     args, unknown_args = get_args()
     if unknown_args:
         log.warning("Unknown arguments: %s", unknown_args)

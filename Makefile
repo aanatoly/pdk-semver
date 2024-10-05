@@ -22,7 +22,7 @@ $(eval $(call penv,app,))
 $(eval $(call penv,dev,-r .ci/requirements.txt))
 
 
-.PHONY: init build install einstall clean distclean test upload docker
+.PHONY: all init build install einstall clean distclean test upload docker
 
 ifndef $(V)
 V=

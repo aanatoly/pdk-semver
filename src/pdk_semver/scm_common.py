@@ -19,7 +19,7 @@ class Commit:
         log.debug("unsupported %s", path)
         return False
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.info = {
             "type": self.Name,
             "tag": "0.1.0",

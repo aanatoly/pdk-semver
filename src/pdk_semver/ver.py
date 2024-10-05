@@ -32,8 +32,7 @@ class Version:
         log.debug("info %s", info)
         xstyle = self.Styles[style]
         txt = xstyle.format(extra=extra, **info)
-        txt = [e for e in txt.split(".") if e]
-        txt = ".".join(txt)
+        txt = ".".join([e for e in txt.split(".") if e])
         txt = "-" + txt if txt else ""
         txt = f"{info['tag']}{txt}"
         log.debug("txt %s", txt)
