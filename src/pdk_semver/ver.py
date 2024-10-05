@@ -23,6 +23,7 @@ class Version:
         self.commit = commit
 
     def fmt(self, style: str = "internal", extra: str = "") -> str:
+        """Format scm version."""
         info = dict(self.commit.info)
         if info["count"] != "0":
             info["count"] = "rev." + info["count"]

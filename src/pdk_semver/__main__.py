@@ -1,27 +1,17 @@
 """
-Pretty print package version.
-
-The full version style has these components:
-[base]-[revision].[release info].[build info]
-
-You can override components via command line options.
+Pretty print project's versions in different styles.
 
 EPILOG:
-Examples:
-Print version in default style, which is "internal"
-  $ pdk-semver
-  3.2.2-rev.3.git.b674019
+$ pdk-semver -s all --extra some.info
+internal  3.2.2-rev.3.some.info.git.b674019
+  public  3.2.2-rev.3.some.info
+    base  3.2.2-some.info
 
-Print version in default style, with release info "arch.aarch64"
-  $ pdk-semver --extra arch.aarch64
-  3.2.2-rev.3.arch.aarch64.git.b674019
+$ pdk-semver
+3.2.2-rev.3.git.b674019
 
-Print all styles
-  $ pdk-semver -s all --extra some.info
-  internal 3.2.2-rev.3.some.info.git.b674019
-    public 3.2.2-rev.3.some.info
-   baserev 3.2.2-rev.3
-      base 3.2.2
+$ pdk-semver --extra arch.aarch64
+3.2.2-rev.3.arch.aarch64.git.b674019
 """
 
 import logging
