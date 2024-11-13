@@ -1,0 +1,32 @@
+---
+APPLY_FIXES: none
+
+# If you use ENABLE variable, all other languages/formats/tooling-formats will
+# be disabled by default
+# ENABLE:
+
+# If you use ENABLE_LINTERS variable, all other linters will be disabled by
+# default
+ENABLE_LINTERS:
+  - PYTHON_RUFF
+  # - PYTHON_BANDIT
+  - PYTHON_MYPY
+  - BASH_SHELLCHECK
+  - BASH_SHFMT
+  - JSON_JSONLINT
+  # - MARKDOWN_MARKDOWNLINT
+  - LUA_STYLUA
+  - MAKEFILE_CHECKMAKE
+  - ANSIBLE_ANSIBLE_LINT
+  - REPOSITORY_GIT_DIFF
+  - REPOSITORY_GITLEAKS
+
+DISABLE:
+  - COPYPASTE # Comment to enable checks of excessive copy-pastes
+  # - SPELL  # Uncomment to disable checks of spelling mistakes
+
+SHOW_ELAPSED_TIME: true
+
+FILEIO_REPORTER: false
+# Uncomment if you want MegaLinter to detect errors but not block CI to pass
+# DISABLE_ERRORS: true

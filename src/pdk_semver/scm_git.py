@@ -18,7 +18,7 @@ class GitCommit(Commit):
     Name = "git"
 
     @staticmethod
-    def supported(path: str) -> bool:
+    def supported(path: str) -> bool:  # type: ignore[explicit-override]
         cmd = ["git", "-C", path, "rev-parse", "--git-dir"]
         p = sp.run(cmd, check=False, stdout=sp.DEVNULL, stderr=sp.DEVNULL)
         return p.returncode == 0

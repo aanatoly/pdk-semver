@@ -1,0 +1,6 @@
+---
+profile: shared  # min, basic, moderate,safety, shared, production
+skip_list:
+  - name[casing]
+  - name[template]
+  - role-name

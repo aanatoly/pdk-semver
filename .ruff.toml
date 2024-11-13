@@ -1,0 +1,71 @@
+[lint]
+select = [
+    # > pydocstyle
+    "D100",
+    "D2",
+    "D3",
+    "D4",
+    # > flake8-2020
+    "YTT",
+    # > flake8-boolean-trap
+    "FBT",
+    # > flake8-bugbear
+    "B",
+    # > flake8-builtins
+    "A",
+    # > flake8-comprehensions
+    "C4",
+    # > flake8-datetimez
+    "DTZ",
+    # > flake8-debugger
+    "T10",
+    # > flake8-errmsg
+    "EM",
+    # > flake8-executable
+    "EXE",
+    # > flake8-implicit-str-concat
+    "ISC",
+    # > flake8-logging-format
+    "G",
+    # > flake8-pie
+    "PIE",
+    # > flake8-pytest-style
+    "PT",
+    # > flake8-return
+    "RET",
+    # > flake8-unused-arguments
+    "ARG",
+    # > Pylint
+    "PL",
+    # > eradicate
+    "ERA",
+    # > isort
+    "I",
+    # > ruff
+    "RUF",
+    # > pep8-naming
+    "N",
+    # > pyflakes
+    "F",
+    # > pycodestyle
+    "E",
+    # > pycodestyle
+    "W",
+]
+
+ignore = [
+    # boolean as func argument
+    "FBT001",
+    "FBT002",
+    # 1 blank line required before class docstring
+    "D203",
+    # No blank lines allowed after function docstring
+    "D202",
+    # Multi-line docstring summary should start at the first line
+    "D212",
+    # Module level import not at top of file
+    "E402",
+]
+
+fixable = ['ALL']
+unfixable = []

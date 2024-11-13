@@ -15,9 +15,7 @@
       "max_line_length": "83",
       "build_docker": "no",
       "use_spelling": "no",
-      "_copy_without_render": [
-        ".ci/venv"
-      ],
+      "_copy_without_render": [".ci/venv"],
       "_template": "https://github.com/aanatoly/pdk-cookiecutter/"
     }
   },
