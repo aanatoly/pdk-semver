@@ -4,9 +4,7 @@ dynamic = ["version"]
 description = "Versioning tool"
 readme = "README.md"
 license = { file = "LICENSE" }
-authors = [
-    { name = "Anatoly Asviyan", email = "jon@dot.com" },
-]
+authors = [{ name = "Anatoly Asviyan", email = "jon@dot.com" }]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Console",
@@ -17,9 +15,7 @@ classifiers = [
     "Topic :: Software Development",
 ]
 
-dependencies = [
-    "pydevkit >= 3.1.2, < 4.0.0"
-]
+dependencies = ["pydevkit >= 3.1.2, < 4.0.0"]
 
 
 [project.scripts]
@@ -27,7 +23,7 @@ pdk-semver = "pdk_semver.__main__:main"
 
 
 [project.urls]
-Homepage   = "https://github.com/aanatoly/pdk-semver"
+Homepage = "https://github.com/aanatoly/pdk-semver"
 Repository = "https://github.com/aanatoly/pdk-semver"
 
 #### pdm ####
@@ -41,7 +37,7 @@ write_to = "pdk_semver/__version__.py"
 write_template = "__version__ = '{}'"
 
 [tool.pdm.build]
-excludes = [ "**/.*.sw*" ]
+excludes = ["**/.*.sw*"]
 
 [tool.cruft]
 skip = ["README.md", "tests/"]
@@ -52,7 +48,10 @@ line-length = 83
 [tool.ruff]
 select = [
     # > pydocstyle
-    "D100", "D2", "D3", "D4",
+    "D100",
+    "D2",
+    "D3",
+    "D4",
     # > flake8-2020
     "YTT",
     # > flake8-boolean-trap
@@ -98,7 +97,7 @@ select = [
     # > pycodestyle
     "E",
     # > pycodestyle
-    "W"
+    "W",
 ]
 
 ignore = [
@@ -112,15 +111,55 @@ ignore = [
     # Multi-line docstring summary should start at the first line
     "D212",
     # Module level import not at top of file
-    "E402"
+    "E402",
 ]
 
 # Allow autofix for all enabled rules (when `--fix`) is provided.
 fixable = [
-    "A", "B", "C", "D", "E", "F", "G", "I", "N", "Q", "S", "T", "W", "ANN",
-    "ARG", "BLE", "COM", "DJ", "DTZ", "EM", "ERA", "EXE", "FBT", "ICN", "INP",
-    "ISC", "NPY", "PD", "PGH", "PIE", "PL", "PT", "PTH", "PYI", "RET", "RSE",
-    "RUF", "SIM", "SLF", "TCH", "TID", "TRY", "UP", "YTT"
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "I",
+    "N",
+    "Q",
+    "S",
+    "T",
+    "W",
+    "ANN",
+    "ARG",
+    "BLE",
+    "COM",
+    "DJ",
+    "DTZ",
+    "EM",
+    "ERA",
+    "EXE",
+    "FBT",
+    "ICN",
+    "INP",
+    "ISC",
+    "NPY",
+    "PD",
+    "PGH",
+    "PIE",
+    "PL",
+    "PT",
+    "PTH",
+    "PYI",
+    "RET",
+    "RSE",
+    "RUF",
+    "SIM",
+    "SLF",
+    "TCH",
+    "TID",
+    "TRY",
+    "UP",
+    "YTT",
 ]
 unfixable = []
 
@@ -148,18 +187,12 @@ tag_template = "{new_version}"
 src = ".pkg-info.json"
 
 [[tool.tbump.before_commit]]
-name = "check changelog style"
-cmd = ".ci/venv --name=app run check-changelog --release={new_version}"
-
-[[tool.tbump.before_commit]]
 name = "check version in changelog"
 cmd = "grep -q {new_version} CHANGELOG.md"
 
 [tool.basedpyright]
 include = ["src"]
-exclude = [
-    "**/__pycache__",
-]
+exclude = ["**/__pycache__"]
 
 # reportMissingImports = "error"
 reportAny = false
@@ -171,4 +204,4 @@ reportUnusedCallResult = false
 ignore_missing_imports = true
 strict = true
 show_error_codes = true
-files =["src"]
+files = ["src"]

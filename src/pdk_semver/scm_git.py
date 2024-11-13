@@ -55,5 +55,5 @@ class GitCommit(Commit):
 
         cmd = ["git", "-C", adir, "rev-parse", "--show-toplevel"]
         p = my_run(cmd)
-        txt = p.stdout.strip().split('/')[-1]
+        txt = p.stdout.strip().split("/")[-1]
         self.info["name"] = txt
