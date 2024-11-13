@@ -201,7 +201,9 @@ reportMissingTypeStubs = false
 reportUnusedCallResult = false
 
 [tool.mypy]
+mypy_path = "$MYPY_CONFIG_FILE_DIR/.venv"
 ignore_missing_imports = true
 strict = true
 show_error_codes = true
+disallow_any_expr = false
 files = ["src"]

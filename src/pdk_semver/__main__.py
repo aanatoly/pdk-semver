@@ -17,6 +17,7 @@ $ pdk-semver --extra arch.aarch64
 import logging
 import sys
 from argparse import Namespace
+from typing import TypedDict
 
 import pydevkit.log.config  # noqa: F401
 from pydevkit.argparse import ArgumentParser
@@ -28,13 +29,12 @@ from .ver import Version
 log = logging.getLogger(__name__)
 
 
-class ArgsTyped:
-    def __init__(self, kw: dict[str, str]):
-        self.path: str = kw["path"]
-        self.ref: str = kw["ref"]
-        self.style: str = kw["style"]
-        self.extra: str = kw["extra"]
-        self.prn_name: bool = kw["prn_name"]
+class ArgsTyped(TypedDict):
+    path: str
+    ref: str
+    style: str
+    extra: str
+    prn_name: bool
 
 
 def get_args() -> tuple[Namespace, list[str]]:
@@ -62,7 +62,7 @@ def get_args() -> tuple[Namespace, list[str]]:
         action="store_true",
     )
 
-    return p.parse_known_args()
+    return p.parse_known_args()  # type: ignore[no-any-return]
 
 
 def main() -> None:
@@ -71,7 +71,7 @@ def main() -> None:
         log.warning("Unknown arguments: %s", unknown_args)
         sys.exit(1)
 
-    argst = ArgsTyped(vars(args))
+    argst = ArgsTyped(vars(args))  # type: ignore[misc]
     ver = Version(get_commit(argst.path, argst.ref))
     if argst.style != "all":
         print(ver.fmt(argst.style, argst.extra, argst.prn_name))
