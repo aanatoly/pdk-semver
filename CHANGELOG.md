@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.0] - 2024-11-13
+
+### Added
+
+ - print project name with -n option
+
 ## [1.2.1] - 2024-10-05
 
 ### Fixed
@@ -32,6 +38,7 @@
 
  * initial commit
 
+[1.3.0]: https://github.com/aanatoly/pdk-semver/releases/tag/1.3.0
 [1.2.1]: https://github.com/aanatoly/pdk-semver/releases/tag/1.2.1
 [1.2.0]: https://github.com/aanatoly/pdk-semver/releases/tag/1.2.0
 [1.1.0]: https://github.com/aanatoly/pdk-semver/releases/tag/1.1.0
