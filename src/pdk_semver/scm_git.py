@@ -28,7 +28,7 @@ class GitCommit(Commit):
         self.info["path"] = adir
         self.info["ref"] = aref
 
-        def my_run(cmd: list[str]):
+        def my_run(cmd: list[str]) -> sp.CompletedProcess[str]:
             log.debug("cmd %s", cmd)
             return sp.run(
                 cmd, check=False, text=True, stdout=sp.PIPE, stderr=sp.DEVNULL
@@ -52,3 +52,8 @@ class GitCommit(Commit):
         p = my_run(cmd)
         txt = p.stdout.strip()
         self.info["hash"] = txt
+
+        cmd = ["git", "-C", adir, "rev-parse", "--show-toplevel"]
+        p = my_run(cmd)
+        txt = p.stdout.strip().split('/')[-1]
+        self.info["name"] = txt

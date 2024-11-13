@@ -16,6 +16,7 @@ $ pdk-semver --extra arch.aarch64
 
 import logging
 import sys
+from argparse import Namespace
 
 import pydevkit.log.config  # noqa: F401
 from pydevkit.argparse import ArgumentParser
@@ -27,16 +28,16 @@ from .ver import Version
 log = logging.getLogger(__name__)
 
 
-def get_cmd_vals(args: object) -> dict[str, str]:
-    vals: dict[str, str] = {}
-    for k, v in vars(args).items():
-        pfx = k.split("_", 1)[0]
-        if pfx in ["rinfo"]:
-            vals[k] = v
-    return vals
+class ArgsTyped:
+    def __init__(self, kw: dict[str, str]):
+        self.path: str = kw["path"]
+        self.ref: str = kw["ref"]
+        self.style: str = kw["style"]
+        self.extra: str = kw["extra"]
+        self.prn_name: bool = kw["prn_name"]
 
 
-def get_args():
+def get_args() -> tuple[Namespace, list[str]]:
     p = ArgumentParser(help=__doc__, version=__version__, usage="short")
     p.add_argument(
         "-C", help="path to git repo", dest="path", metavar="path", default="."
@@ -54,6 +55,12 @@ def get_args():
         choices=styles,
     )
     p.add_argument("--extra", help="extra info", metavar="txt", default="")
+    p.add_argument(
+        "-n",
+        help="print project name before version",
+        dest="prn_name",
+        action="store_true",
+    )
 
     return p.parse_known_args()
 
@@ -64,13 +71,14 @@ def main() -> None:
         log.warning("Unknown arguments: %s", unknown_args)
         sys.exit(1)
 
-    ver = Version(get_commit(args.path, args.ref))
-    if args.style != "all":
-        print(ver.fmt(args.style, args.extra))
+    argst = ArgsTyped(vars(args))
+    ver = Version(get_commit(argst.path, argst.ref))
+    if argst.style != "all":
+        print(ver.fmt(argst.style, argst.extra, argst.prn_name))
         return
 
     for k in Version.Styles:
-        print("%8s" % k, ver.fmt(k, args.extra))
+        print("%8s" % k, ver.fmt(k, argst.extra, argst.prn_name))
 
 
 if __name__ == "__main__":

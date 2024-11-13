@@ -22,6 +22,7 @@ pip install pdk-semver
 ```
 
 ## Development
+
 See [development](docs/devel.md) doc
 
 [pkg-link]: https://pypi.python.org/pypi/pdk-semver/
