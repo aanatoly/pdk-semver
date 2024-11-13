@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Manage python virtual environments
-#
-# usage: venv [--name=NAME] command [arguemnts]
+# usage: venv [--name=NAME] command [arguments]
 #
 # Options
 #  --name=NAME   name of venv, defailt is "dev"
@@ -130,7 +129,7 @@ main() {
 
     if [ "$cmd" == "list" ]; then
         while IFS= read -r -d '' e; do
-            msg "vrtual env $e"
+            msg "virtual env $e"
             "$e"/bin/python --version
             "$e"/bin/pip --version
             echo "Installed $("$e"/bin/pip freeze | wc -l) packages"
