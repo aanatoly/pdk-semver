@@ -39,12 +39,8 @@ class ArgsTyped(TypedDict):
 
 def get_args() -> tuple[Namespace, list[str]]:
     p = ArgumentParser(help=__doc__, version=__version__, usage="short")
-    p.add_argument(
-        "-C", help="path to git repo", dest="path", metavar="path", default="."
-    )
-    p.add_argument(
-        "-r", help="git revision ref", dest="ref", metavar="ref", default="HEAD"
-    )
+    p.add_argument("-C", help="path to git repo", dest="path", metavar="path", default=".")
+    p.add_argument("-r", help="git revision ref", dest="ref", metavar="ref", default="HEAD")
     styles = [*list(Version.Styles.keys()), "all"]
     p.add_argument(
         "-s",

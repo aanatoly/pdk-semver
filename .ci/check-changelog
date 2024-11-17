@@ -52,15 +52,9 @@ def changelog_has_tag(txt, tag):
     tag_re = re.escape(tag)
     msg = []
     if not re.search(tag_header_re.replace("TAGRE", tag_re), txt):
-        msg += [
-            f" * Tag '{tag}' has no changelog."
-            f" Section '## [{tag}] - YYYY-MM-DD' was not found"
-        ]
+        msg += [f" * Tag '{tag}' has no changelog. Section '## [{tag}] - YYYY-MM-DD' was not found"]
     if not re.search(tag_link_re.replace("TAGRE", tag_re), txt):
-        msg += [
-            f" * Tag '{tag}' has no link to release page."
-            f" Section '[{tag}]: URL' was not found"
-        ]
+        msg += [f" * Tag '{tag}' has no link to release page. Section '[{tag}]: URL' was not found"]
     return msg
 
 

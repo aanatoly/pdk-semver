@@ -22,9 +22,7 @@ class Version:
     def __init__(self, commit: Commit):
         self.commit = commit
 
-    def fmt(
-        self, style: str = "internal", extra: str = "", prn_name: bool = False
-    ) -> str:
+    def fmt(self, style: str = "internal", extra: str = "", prn_name: bool = False) -> str:
         """Format scm version."""
         info = dict(self.commit.info)
         if info["count"] != "0":

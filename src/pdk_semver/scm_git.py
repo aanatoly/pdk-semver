@@ -30,9 +30,7 @@ class GitCommit(Commit):
 
         def my_run(cmd: list[str]) -> sp.CompletedProcess[str]:
             log.debug("cmd %s", cmd)
-            return sp.run(
-                cmd, check=False, text=True, stdout=sp.PIPE, stderr=sp.DEVNULL
-            )
+            return sp.run(cmd, check=False, text=True, stdout=sp.PIPE, stderr=sp.DEVNULL)
 
         cmd = ["git", "-C", adir, "describe", "--abbrev=0", aref]
         p = my_run(cmd)

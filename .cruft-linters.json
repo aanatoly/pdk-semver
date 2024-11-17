@@ -1,0 +1,18 @@
+{
+  "template": "https://github.com/aanatoly/cookiecutter-linters",
+  "commit": "c4d363df1fafde446b8cf5ce18046a32af275a3b",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_slug": "unused",
+      "max_line_length": "120",
+      "use_python": "y",
+      "use_yaml": "y",
+      "use_lua": "n",
+      "use_shell": "y",
+      "use_ansible": "y",
+      "_template": "https://github.com/aanatoly/cookiecutter-linters"
+    }
+  },
+  "directory": null
+}
