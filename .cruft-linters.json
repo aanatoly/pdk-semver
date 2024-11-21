@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/aanatoly/cookiecutter-linters",
-  "commit": "f61fa844f7f0a95096454ce066e9a3cbc1b7ae66",
+  "commit": "250ae904fc2d49278bcbccd762e68efce8cac8c6",
   "checkout": null,
   "context": {
     "cookiecutter": {
